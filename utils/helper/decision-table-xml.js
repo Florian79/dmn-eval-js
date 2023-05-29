@@ -12,7 +12,7 @@ function createModdle(additionalPackages, options) {
 }
 
 function readDmnXml(xml, opts, callback) {
-  return createModdle().fromXML(xml, 'dmn:Definitions', opts, callback);
+  return createModdle().fromXML(xml, 'dmn:Definitions', opts).then((dmnContent) => callback(undefined, dmnContent.rootElement)).catch((e) => callback(e));
 }
 
 function parseRule(rule, idx) {
@@ -127,6 +127,23 @@ function parseDecisions(drgElements) {
 }
 
 function parseDmnXml(xml, opts) {
+  return new Promise((resolve, reject) => {
+    readDmnXml(xml, opts, (err, dmnContent) => {
+      if (err) {
+        reject(err);
+      } else {
+        try {
+          const decisions = parseDecisions(dmnContent.drgElement);
+          resolve(decisions);
+        } catch (err) {
+          reject(err);
+        }
+      }
+    });
+  });
+}
+
+function parseDmnXmlORIG(xml, opts) {
   return new Promise((resolve, reject) => {
     readDmnXml(xml, opts, (err, dmnContent) => {
       if (err) {

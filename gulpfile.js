@@ -10,9 +10,9 @@ const concat = require('gulp-concat');
 const watch = require('gulp-watch');
 const insert = require('gulp-insert');
 const clean = require('gulp-clean');
-const peg = require('./utils/dev/gulp-pegjs');
+const peg = require('gulp-pegjs');
 const minimist = require('minimist');
-const gutil = require('gulp-util');
+//const gutil = require('gulp-util');
 const mocha = require('gulp-mocha');
 var istanbul = require('gulp-istanbul');
 const eslint = require('gulp-eslint');
@@ -102,7 +102,7 @@ gulp.task('mocha', () => gulp.src(['test/*.js'], {
 		.pipe(mocha({
   reporter: 'list',
 }))
-		.on('error', gutil.log));
+		.on('error', console.log));
 
 
 gulp.task('utils:lint', ()=>{
