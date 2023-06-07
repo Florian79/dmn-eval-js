@@ -2,10 +2,20 @@
 *  ©2017-2018 HBT Hamburger Berater Team GmbH
 *  All Rights Reserved.
 */
-const DmnModdle = require('dmn-moddle');
+/*
+import DmnModdle from 'dmn-moddle';
+import moment from 'moment';
+import feel from '../../dist/feel';
+import loglevel from 'loglevel';
+const logger = loglevel.getLogger('dmn-eval-js');
+*/
+
+const DmnModdleX = require('dmn-moddle');
 const logger = require('loglevel').getLogger('dmn-eval-js');
 const moment = require('moment');
 const feel = require('../../dist/feel');
+
+const DmnModdle = DmnModdleX.default || DmnModdleX;
 
 function createModdle(additionalPackages, options) {
   return new DmnModdle(additionalPackages, options);
